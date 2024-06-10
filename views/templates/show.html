@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script defer src="js/index.js"></script>
+    <link rel="stylesheet" href="css/index.css" />
+    <title>License Detector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header class="bg-gray-600">
+      <nav class="flex justify-between">
+        <div
+          class="nav_left text_shadow font-bold text-xl sm:text-2xl p-2 tracking-wider text-white"
+        >
+          <a href="">License Detector</a>
+        </div>
+        <div
+          class="nav_right flex font-bold tracking-wider text-md sm:text-xl text-white p-2 [&>*]:mx-2 [&>*]:cursor-pointer"
+        >
+          <div class="text_shadow hover:border-b-2 border-white">
+            <a href="/"><i class="fa-solid fa-house-chimney"></i> Home</a>
+          </div>
+          <div class="text_shadow hover:border-b-2 border-white">
+            <a href="/show"> <i class="fa-solid fa-car-on"></i> Show </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- Warning 1 -->
+    <section>
+      <div class="bg-purple-600">
+        <h3 class="text-white px-2">
+          This prototype is in early stage, so you might find some inaccuracy in
+          detection. Depends upon the quality of video and position of camera
+          that you just uploaded
+        </h3>
+      </div>
+    </section>
+    <!-- Warning 2 -->
+    <section>
+      <div class="bg-green-600">
+        <h3 class="text-white px-2">
+          This prototype is the property of Nagarro&copy created by Team <u>DevX</u>. The
+          team members that worked on this prototype are Pukhraj Singh, Kartik
+          Mahajan, Anshul Dhawan, Nikhil.
+        </h3>
+      </div>
+    </section>
+    {% if not data %}
+    <div class="flex justify-center items-center">
+      <img src="assets/no_results_found.png" alt="" />
+    </div>
+    {% endif %}
+    <!-- Upload Section -->
+    {% if data %}
+    <section
+      class="p-2 flex justify-center sm:px-4 md:px-6 lg:px-10 xl:px-15 2xl:px-20"
+    >
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 [&>*]:m-2">
+        {% for item in data %}
+        <div class="card drop-shadow-xl border-2 border-black">
+          <img src="{{'http://127.0.0.1:2000/api/image/'+item[0]}}" alt="" />
+          <div>
+            <h1
+              class="text_shadow bg-red-600 px-1 text-white text-xl md:text-2xl text-center"
+            >
+              Vehicle : Car
+            </h1>
+          </div>
+          <div class="">
+            <div class="grid grid-cols-2 text-lg md:text-xl">
+              <h1 class="text-center text-black">
+                Plate : {{item[1]}}
+              </h1>
+              <h1 class="text-center text-black">
+                State : {{item[2]}}
+              </h1>
+              <h1 class="text_shadow text-center bg-indigo-600 text-white">
+                Entry : {{item[3]}}
+              </h1>
+              <h1 class="text_shadow bg-indigo-600 text-center text-white">
+                Exit: None
+              </h1>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </body>
+</html>

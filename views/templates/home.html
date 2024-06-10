@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script defer src="js/index.js"></script>
+    <link rel="stylesheet" href="css/index.css" />
+    <title>License Detector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header class="bg-gray-600">
+      <nav class="flex justify-between">
+        <div
+          class="nav_left text_shadow text-xl sm:text-2xl p-2 tracking-wider text-white"
+        >
+          <a href="">License Detector</a>
+        </div>
+        <div
+          class="nav_right flex font-bold tracking-wider text-md sm:text-xl text-white p-2 [&>*]:mx-2 [&>*]:cursor-pointer"
+        >
+          <div class="text_shadow hover:border-b-2 border-white">
+            <a href="/"><i class="fa-solid fa-house-chimney"></i> Home</a>
+          </div>
+          <div class="text_shadow hover:border-b-2 border-white">
+            <a href="/show"> <i class="fa-solid fa-car-on"></i> Show </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- Warning 1 -->
+    <section>
+      <div class="bg-purple-600">
+        <h3 class="text-white px-2">
+          This prototype is in early stage, so you might find some inaccuracy in
+          detection. Depends upon the quality of video and position of camera
+          that you just uploaded.
+        </h3>
+      </div>
+    </section>
+    <!-- Warning 2 -->
+    <section>
+      <div class="bg-green-600">
+        <h3 class="text-white px-2">
+          This prototype is the property of Nagarro&copy created by Team <u>DevX</u>. The
+          team members that worked on this prototype are Pukhraj Singh, Kartik
+          Mahajan, Anshul Dhawan, Nikhil.
+        </h3>
+      </div>
+    </section>
+    <!-- Upload Section -->
+    <section class="p-2 sm:px-4 md:px-6 lg:px-10 xl:px-15 2xl:px-20">
+      <div class="flex justify-center items-center h-[80vh] my-2">
+        <form
+          action="{{url_for("upload")}}"
+          method="post"
+          enctype="multipart/form-data"
+          class="min-w-full sm:min-w-[500px] border-2 border-black p-2 drop-shadow-md"
+        >
+          <!-- file uploader -->
+          <div
+            id="file_uploader"
+            class="cursor-pointer my-2 border-2 border-black border-dashed p-2"
+          >
+            <input name="video" id="upload_input" type="file" accept="video/*"  hidden />
+            <div class="leading-3">
+              <h1 class="text-6xl text-center text-gray-600">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </h1>
+              <p class="text-center">Upload your video</p>
+            </div>
+          </div>
+          <div
+            id="file_upload_info"
+            style="display: none"
+            class="my-1 text-lg border-2 border-purple-600 border-dashed rounded-lg p-1"
+          >
+            <div class="flex justify-between">
+              <h2 class="">
+                <i
+                  class="text-purple-600 fa-solid fa-arrow-up-from-bracket"
+                ></i>
+                <span id="file_detail" class="tracking-wider">file name</span>
+              </h2>
+              <h2 style="display: none" class="text-green-600" id="tick">
+                <i class="fa-solid fa-circle-check"></i>
+              </h2>
+            </div>
+            <div class="leading-3">
+              <div class="h-[6px] w-full drop-shadow-lg bg-gray-500 rounded-lg">
+                <div
+                  id="progress_bar"
+                  class="my-1 bg-green-600 h-[6px] w-[0%] rounded-l"
+                ></div>
+              </div>
+              <h4 id="progress_indicator" class="text-center mb-1 text-sm">
+                Uploaded : 0%
+              </h4>
+            </div>
+          </div>
+          {% if errorMsg %}
+          <div class="">
+            <h4 class="text-red-600">{{errorMsg}}</h4>
+          </div>
+          {% endif %}
+          <div class="my-2 grid">
+            <button id="startButton"
+              class="bg-green-600 p-1 text-white text-lg tracking-wider drop-shadow-lg rounded-sm hover:text-green-600 hover:bg-white border-2 border-green-600"
+            >
+              Click to Process Video
+            </button>
+            <div class="flex items-center justify-between mt-2">
+              <div id="loader-text" class="hidden px-1">
+              <u>Processing Video</u>...
+              </div>
+              <div id="loader" class="hidden">
+                <div class="loader-content">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form> 
+      </div>
+    </section>
+  </body>
+</html>
